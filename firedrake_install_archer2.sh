@@ -161,8 +161,9 @@ export FIREDRAKE_INSTALL_OPTIONS="--honour-petsc-dir \
     --remove-build-files \
     --venv-name $VENV_NAME \
     --cache-dir $FIREDRAKE_INSTALL_DIR/.cache_$VENV_NAME \
+    --install thetis \
     --package-branch PyOP2 JDBetteridge/isambard_fix \
-    --install thetis"
+    --package-branch thetis no-requirements "
 
 python firedrake-install $FIREDRAKE_INSTALL_OPTIONS
 
