@@ -15,7 +15,6 @@ myScript=example.py
 
 # The following lines should not require modification #######
 export FI_OFI_RXM_SAR_LIMIT=64K
-module load epcc-job-env
 # Activate Firedrake venv (activate once on first node, extract once per node)
 source $FIREDRAKE_DIR/firedrake_activate.sh
 srun --ntasks-per-node 1 $FIREDRAKE_DIR/firedrake_activate.sh
