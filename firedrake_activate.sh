@@ -5,6 +5,8 @@
 # on Archer2 when installed using corresponding  #
 # script                                         #
 # Written by Jack Betteridge April 2020          #
+# Updated by Koki Sagiyama September 2021        #
+# Update by Joe Wallwork December 2021           #
 #                                                #
 ##################################################
 
@@ -19,11 +21,12 @@ export PETSC_ARCH=default
 ### Load required modules ###
 # Clear everything
 module purge
-module load /work/y07/shared/archer2-modules/modulefiles-cse/epcc-setup-env
+module load load-epcc-module
+module load epcc-setup-env
 # Compiler
 module load gcc/10.2.0
 module load cmake/3.18.4
-module load cpe-gnu
+# module load cpe-gnu       NOTE: no longer available
 module load craype
 module load craype-x86-rome
 # Interconnect
@@ -31,28 +34,29 @@ module load libfabric
 module load craype-network-ofi
 module load xpmem
 # Module broken!
-module load cray-dsmml/0.1.3
+module load cray-dsmml/0.1.4
 # Python and MPICH
 module load cray-python/3.8.5.0
-module load cray-mpich/8.1.3
+module load cray-mpich/8.1.9
 # Symbols are missing from the 8.1.3 Cray MPICH
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$CRAY_MPICH_BASEDIR/gnu/9.1/lib
 # Scientific libraries
-module load cray-libsci/20.10.1.2
-module load cray-hdf5-parallel/1.12.0.2
-module load cray-netcdf-hdf5parallel/4.7.4.2
-module load cray-parallel-netcdf/1.12.1.2
+module load cray-libsci/21.08.1.2
+module load cray-hdf5-parallel/1.12.0.7
+module load cray-netcdf-hdf5parallel/4.7.4.7
+module load cray-parallel-netcdf/1.12.1.7
+module load PrgEnv-gnu
 module load metis/5.1.0
 module load parmetis/4.0.3
-module load scotch/6.0.10
-module load mumps/5.2.1
-module load superlu-dist/6.1.1
-module load hypre/2.18.0
+module load scotch
+module load mumps
+module load superlu-dist
+module load hypre
 export HDF5_MPI="ON"
 export PTSCOTCH_PKG_CONFIG_DIR=$LOCAL_BIN
 mkdir -p $PTSCOTCH_PKG_CONFIG_DIR
 if [ ! -f $PTSCOTCH_PKG_CONFIG_DIR/ptscotch.pc ]; then
-    ln -s /work/y07/shared/libs/scotch/6.0.10/GNU/9.3/lib/pkgconfig/ptscotch_gnu_mpi.pc $PTSCOTCH_PKG_CONFIG_DIR/ptscotch.pc
+    ln -s /work/y07/shared/libs/core/scotch/6.1.0/GNU/9.3/lib/pkgconfig/ptscotch_gnu_mpi.pc $PTSCOTCH_PKG_CONFIG_DIR/ptscotch.pc
 fi
 # Dynamic linking
 export CRAYPE_LINK_TYPE=dynamic
